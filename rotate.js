@@ -29,14 +29,28 @@ let model;
 new GLTFLoader().load("model.glb", (gltf) => {
   model = gltf.scene;
   model.scale.set(1, 1, 1);
-  model.position.set(0, 0, 0);
   scene.add(model);
 });
 
-// 毎フレーム描画（アニメーションループ）
+// === 回転速度 ===
+let rotationSpeedX = 0;
+let rotationSpeedY = 0.03;
+let rotationSpeedZ = 0;
+
+// === アニメーション ===
 function animate() {
   requestAnimationFrame(animate);
-  if (model) model.rotation.y += 0.01;
+  if (model) model.rotation.x += rotationSpeedX;
+  if (model) model.rotation.y += rotationSpeedY;
+  if (model) model.rotation.z += rotationSpeedZ;
+
   renderer.render(scene, camera);
 }
 animate();
+
+// === クリックで速度変更 ===
+window.addEventListener("click", () => {
+  rotationSpeedX = (Math.random() - 0.5) * 0.1;
+  rotationSpeedY = (Math.random() - 0.5) * 0.1;
+  rotationSpeedZ = (Math.random() - 0.5) * 0.1;
+});
