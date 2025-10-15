@@ -32,12 +32,12 @@ new GLTFLoader().load("model.glb", (gltf) => {
   scene.add(model);
 });
 
-// === 回転速度 ===
+// 回転速度
 let rotationSpeedX = 0;
 let rotationSpeedY = 0.03;
 let rotationSpeedZ = 0;
 
-// === アニメーション ===
+// アニメーション
 function animate() {
   requestAnimationFrame(animate);
   if (model) model.rotation.x += rotationSpeedX;
@@ -48,7 +48,7 @@ function animate() {
 }
 animate();
 
-// === クリックで速度変更 ===
+// クリックで速度変更
 window.addEventListener("click", () => {
   rotationSpeedX = (Math.random() - 0.5) * 0.1;
   rotationSpeedY = (Math.random() - 0.5) * 0.1;
